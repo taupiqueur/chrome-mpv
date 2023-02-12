@@ -1,0 +1,29 @@
+:root {
+  color-scheme: light dark;
+  --font-family: system-ui;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-color: #ffffff;
+    --foreground-color: #202020;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #202020;
+    --foreground-color: #eaeaea;
+  }
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--foreground-color);
+  font-family: var(--font-family);
+}
+
+/* Use the system font */
+button {
+  font-family: inherit;
+}

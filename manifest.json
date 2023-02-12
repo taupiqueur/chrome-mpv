@@ -1,0 +1,32 @@
+{
+  "name": "mpv",
+  "version": "0.1.0",
+  "description": "Open videos in webpages with a media player program.",
+  "homepage_url": "https://github.com/taupiqueur/chrome-mpv",
+  "manifest_version": 3,
+  "background": {
+    "type": "module",
+    "service_worker": "src/background.js"
+  },
+  "permissions": ["activeTab", "contextMenus", "nativeMessaging", "storage"],
+  "action": {
+    "default_title": "Open with mpv"
+  },
+  "options_ui": {
+    "page": "src/options/options.html"
+  },
+  "icons": {
+    "16": "assets/mpv-logo@16px.png",
+    "32": "assets/mpv-logo@32px.png",
+    "48": "assets/mpv-logo@48px.png",
+    "128": "assets/mpv-logo@128px.png"
+  },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+M",
+        "mac": "MacCtrl+M"
+      }
+    }
+  }
+}
