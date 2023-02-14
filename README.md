@@ -1,6 +1,6 @@
 # mpv for Chrome
 
-Open videos in webpages with a media player program.
+A browser extension that lets you open videos in webpages with a media player program—such as [mpv].
 
 [mpv]: https://mpv.io
 
