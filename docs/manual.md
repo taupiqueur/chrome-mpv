@@ -51,3 +51,13 @@ Example configuration:
   }
 }
 ```
+
+Make sure the commands are in your `PATH`.
+
+On macOS, you can set the `PATH` environment variable for all services through [launchctl].
+
+``` sh
+sudo launchctl config user path "$PATH"
+```
+
+[launchctl]: https://ss64.com/osx/launchctl.html
