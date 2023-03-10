@@ -20,6 +20,20 @@ function createMenuItems() {
   })
 }
 
+// Handles the initial setup when the extension is first installed or updated to a new version.
+// Reference: https://developer.chrome.com/docs/extensions/reference/runtime/#event-onInstalled
+function onInstalled(details) {
+  switch (details.reason) {
+    case 'install':
+      onInstall()
+      break
+    case 'update':
+      onUpdate(details.previousVersion)
+      break
+  }
+  createMenuItems()
+}
+
 // Handles the initial setup when the extension is first installed.
 async function onInstall() {
   const config = await configPromise
@@ -34,53 +48,27 @@ async function onUpdate(previousVersion) {
 }
 
 // Handles option changes.
+// Reference: https://developer.chrome.com/docs/extensions/reference/storage/#event-onChanged
 function onOptionsChange(changes, areaName) {
   Object.assign(mpv, changes.mpv.newValue)
 }
 
-// Handles the browser action.
+// Handles the browser action on click.
+// Reference: https://developer.chrome.com/docs/extensions/reference/action/#event-onClicked
 function onAction(tab) {
   mpv.open([tab.url])
 }
 
 // Handles the context menu on click.
+// Reference: https://developer.chrome.com/docs/extensions/reference/contextMenus/#event-onClicked
 function onMenuItemClicked(info, tab) {
   mpv.open([info.linkUrl ?? info.srcUrl ?? info.selectionText ?? info.pageUrl ?? tab.url])
 }
 
-// Configure mpv.
-chrome.storage.sync.get(options => Object.assign(mpv, options.mpv))
-
-// Handle the initial setup when the extension is first installed or updated to a new version.
-// Reference: https://developer.chrome.com/docs/extensions/reference/runtime/#event-onInstalled
-chrome.runtime.onInstalled.addListener((details) => {
-  switch (details.reason) {
-    case 'install':
-      onInstall()
-      break
-    case 'update':
-      onUpdate(details.previousVersion)
-      break
-  }
-  createMenuItems()
-})
-
-// Handle option changes.
-// Reference: https://developer.chrome.com/docs/extensions/reference/storage/#event-onChanged
-chrome.storage.onChanged.addListener(onOptionsChange)
-
-// Handle the browser action on click.
-// Reference: https://developer.chrome.com/docs/extensions/reference/action/#event-onClicked
-chrome.action.onClicked.addListener(onAction)
-
-// Handle the context menu on click.
-// Reference: https://developer.chrome.com/docs/extensions/reference/contextMenus/#event-onClicked
-chrome.contextMenus.onClicked.addListener(onMenuItemClicked)
-
-// Handle long-lived connections.
-// Use the channel name to distinguish different types of connections.
+// Handles long-lived connections.
+// Uses the channel name to distinguish different types of connections.
 // Reference: https://developer.chrome.com/docs/extensions/mv3/messaging/#connect
-chrome.runtime.onConnect.addListener((port) => {
+function onConnect(port) {
   switch (port.name) {
     case 'options':
       optionsWorker.onConnect(port)
@@ -88,4 +76,15 @@ chrome.runtime.onConnect.addListener((port) => {
     default:
       port.postMessage({ type: 'error', message: `Unknown type of connection: ${port.name}` })
   }
-})
+}
+
+// Configure mpv.
+chrome.storage.sync.get(options => Object.assign(mpv, options.mpv))
+
+// Set up listeners.
+// Reference: https://developer.chrome.com/docs/extensions/mv3/service_workers/#listeners
+chrome.runtime.onInstalled.addListener(onInstalled)
+chrome.storage.onChanged.addListener(onOptionsChange)
+chrome.action.onClicked.addListener(onAction)
+chrome.contextMenus.onClicked.addListener(onMenuItemClicked)
+chrome.runtime.onConnect.addListener(onConnect)
