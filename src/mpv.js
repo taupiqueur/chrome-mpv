@@ -9,7 +9,7 @@ export async function mpv(command, args, urls) {
 
 export default {
   command: 'mpv',
-  args: [],
+  args: ['--'],
   open(urls) {
     return mpv(this.command, this.args, urls)
   }

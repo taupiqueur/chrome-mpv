@@ -21,7 +21,7 @@ Example configuration:
 {
   "mpv": {
     "command": "mpv",
-    "args": []
+    "args": ["--"]
   }
 }
 ```
@@ -32,7 +32,7 @@ Example configuration:
     "command": "sh",
     "args": [
       "-c",
-      "jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --force-window=immediate --ontop --on-all-workspaces --geometry=30%+50%+50% \"$@\"",
+      "jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --force-window=immediate --ontop --on-all-workspaces --geometry=30%+50%+50% -- \"$@\"",
       "--"
     ]
   }
@@ -45,7 +45,7 @@ Example configuration:
     "command": "sh",
     "args": [
       "-c",
-      "jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --macos-app-activation-policy=accessory --ontop-level=desktop --ontop --on-all-workspaces --fs --no-native-fs --no-focus-on-open \"$@\"",
+      "jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --macos-app-activation-policy=accessory --ontop-level=desktop --ontop --on-all-workspaces --fs --no-native-fs --no-focus-on-open -- \"$@\"",
       "--"
     ]
   }
