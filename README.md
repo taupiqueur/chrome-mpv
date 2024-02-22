@@ -32,8 +32,8 @@ make build
 ### Load an unpacked extension
 
 1. Navigate to `chrome://extensions`.
-2. Enable **Developer mode**.
-3. Click **Load unpacked** and select the extension directory.
+2. Enable “Developer mode”.
+3. Click “Load unpacked” and select the extension directory.
 
 ### Allow native messaging with the shell application
 

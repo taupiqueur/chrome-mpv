@@ -1,7 +1,18 @@
-// Opens specified URLs with the given media player program.
-// Returns the command result.
+// This module provides the functionality to open videos
+// with a media player program—such as mpv.
+
+import '../@types/chrome_shell.js'
+
+/**
+ * Opens specified URLs with the given media player program.
+ *
+ * @param {string} command
+ * @param {string[]} args
+ * @param {string[]} urls
+ * @returns {Promise<void>}
+ */
 export async function mpv(command, args, urls) {
-  return chrome.runtime.sendNativeMessage('shell', {
+  await chrome.runtime.sendNativeMessage('shell', {
     command,
     args: args.concat(urls)
   })

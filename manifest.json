@@ -9,7 +9,12 @@
     "type": "module",
     "service_worker": "src/background.js"
   },
-  "permissions": ["activeTab", "contextMenus", "nativeMessaging", "storage"],
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "nativeMessaging",
+    "storage"
+  ],
   "action": {
     "default_title": "Open with mpv"
   },

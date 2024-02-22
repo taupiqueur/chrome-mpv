@@ -13,7 +13,7 @@ Navigate to `chrome://extensions/shortcuts` to configure keyboard shortcuts.
 ### Configure the media player program
 
 You can also configure the media player program by importing and exporting settings
-in the **Options** page—Right-click the mpv toolbar button and select **Options**.
+in the “Options” page—Right-click the mpv toolbar button and select “Options”.
 
 Example configuration:
 
