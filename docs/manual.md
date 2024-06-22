@@ -1,5 +1,21 @@
 # Manual
 
+## Post-installation instructions
+
+Requires [chrome-shell] for running shell commands.
+
+[chrome-shell]: https://github.com/taupiqueur/chrome-shell
+
+### Allow native messaging with the shell application
+
+Copy the extension ID and run the following in your terminal.
+
+```
+chrome-shell install [--target=<platform>] [<extension-id>...]
+```
+
+Possible targets are `chrome`, `chrome-dev`, `chrome-beta`, `chrome-canary` and `chromium`.
+
 ## Usage
 
 `Ctrl+M` is the main keyboard shortcut.

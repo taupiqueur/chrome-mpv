@@ -13,7 +13,8 @@
     "activeTab",
     "contextMenus",
     "nativeMessaging",
-    "storage"
+    "storage",
+    "tabGroups"
   ],
   "action": {
     "default_title": "Open with mpv"

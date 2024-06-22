@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>mpv Manual</title>
+    <link href="manual.css" rel="stylesheet">
+  </head>
+  <body>
+    <main id="manual">
+      <h1>
+        <a href="#manual">
+          Manual
+        </a>
+      </h1>
+      <section id="post_installation_instructions">
+        <h2>
+          <a href="#post_installation_instructions">
+            Post-installation instructions
+          </a>
+        </h2>
+        <p>
+          Requires <a href="https://github.com/taupiqueur/chrome-shell">chrome-shell</a> for running shell commands.
+        </p>
+        <section id="allow_native_messaging_with_the_shell_application">
+          <h3>
+            <a href="#allow_native_messaging_with_the_shell_application">
+              Allow native messaging with the shell application
+            </a>
+          </h3>
+          <p>
+            Copy the extension ID and run the following in your terminal.
+          </p>
+          <pre><code>chrome-shell install [--target=&lt;platform&gt;] [&lt;extension-id&gt;...]
+</code></pre>
+          <p>
+            Possible targets are <code>chrome</code>, <code>chrome-dev</code>, <code>chrome-beta</code>, <code>chrome-canary</code> and <code>chromium</code>.
+          </p>
+        </section>
+      </section>
+      <section id="usage">
+        <h2>
+          <a href="#usage">
+            Usage
+          </a>
+        </h2>
+        <p>
+          <kbd>Ctrl</kbd>+<kbd>M</kbd> is the main keyboard shortcut.
+        </p>
+        <p>
+          Use it to open videos in webpages with mpv.
+        </p>
+        <section id="configure_keyboard_shortcuts">
+          <h3>
+            <a href="#configure_keyboard_shortcuts">
+              Configure keyboard shortcuts
+            </a>
+          </h3>
+          <p>
+            Navigate to <code>chrome://extensions/shortcuts</code> to configure keyboard shortcuts.
+          </p>
+        </section>
+        <section id="configure_the_media_player_program">
+          <h3>
+            <a href="#configure_the_media_player_program">
+              Configure the media player program
+            </a>
+          </h3>
+          <p>
+            You can also configure the media player program by importing and exporting settings
+            in the “Options” page—Right-click the mpv toolbar button and select “Options”.
+          </p>
+          <p>
+            Example configuration:
+          </p>
+          <pre><code data-lang="json">{
+  <span data-type="string">"mpv"</span>: {
+    <span data-type="string">"command"</span>: <span data-type="string">"mpv"</span>,
+    <span data-type="string">"args"</span>: [<span data-type="string">"--"</span>]
+  }
+}
+</code></pre>
+          <pre><code data-lang="json">{
+  <span data-type="string">"mpv"</span>: {
+    <span data-type="string">"command"</span>: <span data-type="string">"sh"</span>,
+    <span data-type="string">"args"</span>: [
+      <span data-type="string">"-c"</span>,
+      <span data-type="string">"jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --force-window=immediate --ontop --on-all-workspaces --geometry=30%+50%+50% -- \"$@\""</span>,
+      <span data-type="string">"--"</span>
+    ]
+  }
+}
+</code></pre>
+          <pre><code data-lang="json">{
+  <span data-type="string">"mpv"</span>: {
+    <span data-type="string">"command"</span>: <span data-type="string">"sh"</span>,
+    <span data-type="string">"args"</span>: [
+      <span data-type="string">"-c"</span>,
+      <span data-type="string">"jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --macos-app-activation-policy=accessory --ontop-level=desktop --ontop --on-all-workspaces --fs --no-native-fs --no-focus-on-open -- \"$@\""</span>,
+      <span data-type="string">"--"</span>
+    ]
+  }
+}
+</code></pre>
+          <p>
+            Make sure the commands are in your <code>PATH</code>.
+          </p>
+          <p>
+            On macOS, you can set the <code>PATH</code> environment variable for all services through <a href="https://ss64.com/osx/launchctl.html">launchctl</a>.
+          </p>
+          <pre><code data-lang="sh"><span data-type="keyword">sudo</span> launchctl config user path <span data-type="string">"$PATH"</span>
+</code></pre>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
