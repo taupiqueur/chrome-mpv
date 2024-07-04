@@ -30,8 +30,21 @@
           <p>
             Copy the extension ID and run the following in your terminal.
           </p>
-          <pre><code>chrome-shell install [--target=&lt;platform&gt;] [&lt;extension-id&gt;...]
+          <div class="code-block-container">
+            <pre><code><b>chrome-shell</b> <b>install</b> [<b>--target</b>=<i>platform</i>] [<i>extension_ids</i>]
 </code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="chrome-shell install [--target=platform] [extension_ids]
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
           <p>
             Possible targets are <code>chrome</code>, <code>chrome-dev</code>, <code>chrome-beta</code>, <code>chrome-canary</code> and <code>chromium</code>.
           </p>
@@ -72,14 +85,33 @@
           <p>
             Example configuration:
           </p>
-          <pre><code data-lang="json">{
+          <div class="code-block-container">
+            <pre><code data-lang="json">{
   <span data-type="string">"mpv"</span>: {
     <span data-type="string">"command"</span>: <span data-type="string">"mpv"</span>,
     <span data-type="string">"args"</span>: [<span data-type="string">"--"</span>]
   }
 }
 </code></pre>
-          <pre><code data-lang="json">{
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="{
+  &quot;mpv&quot;: {
+    &quot;command&quot;: &quot;mpv&quot;,
+    &quot;args&quot;: [&quot;--&quot;]
+  }
+}
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <div class="code-block-container">
+            <pre><code data-lang="json">{
   <span data-type="string">"mpv"</span>: {
     <span data-type="string">"command"</span>: <span data-type="string">"sh"</span>,
     <span data-type="string">"args"</span>: [
@@ -90,7 +122,29 @@
   }
 }
 </code></pre>
-          <pre><code data-lang="json">{
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="{
+  &quot;mpv&quot;: {
+    &quot;command&quot;: &quot;sh&quot;,
+    &quot;args&quot;: [
+      &quot;-c&quot;,
+      &quot;jq -nc '$ARGS.positional[] | { command: [\&quot;loadfile\&quot;, .] }' --args -- \&quot;$@\&quot; | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --force-window=immediate --ontop --on-all-workspaces --geometry=30%+50%+50% -- \&quot;$@\&quot;&quot;,
+      &quot;--&quot;
+    ]
+  }
+}
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <div class="code-block-container">
+            <pre><code data-lang="json">{
   <span data-type="string">"mpv"</span>: {
     <span data-type="string">"command"</span>: <span data-type="string">"sh"</span>,
     <span data-type="string">"args"</span>: [
@@ -101,16 +155,51 @@
   }
 }
 </code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="{
+  &quot;mpv&quot;: {
+    &quot;command&quot;: &quot;sh&quot;,
+    &quot;args&quot;: [
+      &quot;-c&quot;,
+      &quot;jq -nc '$ARGS.positional[] | { command: [\&quot;loadfile\&quot;, .] }' --args -- \&quot;$@\&quot; | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --macos-app-activation-policy=accessory --ontop-level=desktop --ontop --on-all-workspaces --fs --no-native-fs --no-focus-on-open -- \&quot;$@\&quot;&quot;,
+      &quot;--&quot;
+    ]
+  }
+}
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
           <p>
             Make sure the commands are in your <code>PATH</code>.
           </p>
           <p>
             On macOS, you can set the <code>PATH</code> environment variable for all services through <a href="https://ss64.com/osx/launchctl.html">launchctl</a>.
           </p>
-          <pre><code data-lang="sh"><span data-type="keyword">sudo</span> launchctl config user path <span data-type="string">"$PATH"</span>
+          <div class="code-block-container">
+            <pre><code data-lang="sh"><span data-type="keyword">sudo</span> launchctl config user path <span data-type="string">"$PATH"</span>
 </code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="sudo launchctl config user path &quot;$PATH&quot;
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
         </section>
       </section>
     </main>
+    <script type="module" src="manual.js"></script>
   </body>
 </html>
