@@ -44,6 +44,12 @@ function createMenuItems() {
     title: 'Sponsor this project',
     contexts: ['action']
   })
+
+  chrome.contextMenus.create({
+    id: 'copy_debug_info',
+    title: 'Copy debug info',
+    contexts: ['action']
+  })
 }
 
 /**
@@ -129,9 +135,9 @@ function onAction(tab) {
  *
  * @param {chrome.contextMenus.OnClickData} info
  * @param {chrome.tabs.Tab} tab
- * @returns {void}
+ * @returns {Promise<void>}
  */
-function onMenuItemClicked(info, tab) {
+async function onMenuItemClicked(info, tab) {
   switch (info.menuItemId) {
     case 'open_mpv':
       mpv.open([info.linkUrl ?? info.srcUrl ?? info.selectionText ?? info.pageUrl ?? tab.url])
@@ -148,6 +154,23 @@ function onMenuItemClicked(info, tab) {
     case 'open_sponsorship_page':
       openNewTabRight(tab, 'https://github.com/sponsors/taupiqueur')
       break
+
+    case 'copy_debug_info': {
+      const debugInfo = await getDebugInfo()
+
+      await chrome.scripting.executeScript({
+        target: {
+          tabId: tab.id
+        },
+        func: (text) => {
+          return navigator.clipboard.writeText(text)
+        },
+        args: [
+          JSON.stringify(debugInfo, null, 2)
+        ]
+      })
+      break
+    }
   }
 }
 
@@ -174,6 +197,48 @@ async function openNewTabRight(openerTab, url) {
         createdTab.id
       ]
     })
+  }
+}
+
+/**
+ * Returns debug info.
+ *
+ * https://github.com/lydell/LinkHints/blob/main/src/popup/Program.tsx
+ *
+ * @typedef {object} DebugInfo
+ * @property {string} version
+ * @property {string} userAgent
+ * @property {chrome.runtime.PlatformInfo} platformInfo
+ * @property {object} syncStorage
+ * @property {object} localStorage
+ * @property {object} sessionStorage
+ * @property {string} language
+ *
+ * @returns {Promise<DebugInfo>}
+ */
+async function getDebugInfo() {
+  const manifest = chrome.runtime.getManifest()
+
+  const [
+    platformInfo,
+    syncStorage,
+    localStorage,
+    sessionStorage,
+  ] = await Promise.all([
+    chrome.runtime.getPlatformInfo(),
+    chrome.storage.sync.get(),
+    chrome.storage.local.get(),
+    chrome.storage.session.get(),
+  ])
+
+  return {
+    version: manifest.version,
+    userAgent: navigator.userAgent,
+    platformInfo,
+    syncStorage,
+    localStorage,
+    sessionStorage,
+    language: navigator.language,
   }
 }
 
