@@ -1,8 +1,19 @@
 # mpv for Chrome
 
+<img src="https://github.com/mpv-player/mpv/raw/master/etc/mpv-gradient.svg" alt="" width="128" height="128" align="left">
+
 A browser extension that lets you open videos in webpages with a media player program—such as [mpv].
 
 [mpv]: https://mpv.io
+
+**[Documentation] | [Changelog] | [Contributing]**
+
+**[Add to Chrome]**
+
+[Documentation]: docs/manual.md
+[Changelog]: CHANGELOG.md
+[Contributing]: CONTRIBUTING.md
+[Add to Chrome]: #installation
 
 ## Installation
 
