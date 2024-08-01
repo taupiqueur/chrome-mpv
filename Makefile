@@ -4,9 +4,6 @@ version = $(shell git describe --tags --always)
 
 all: assets/mpv-logo@16px.png assets/mpv-logo@32px.png assets/mpv-logo@48px.png assets/mpv-logo@128px.png
 
-assets/mpv-logo.svg:
-	curl -sSL -z $@ --create-dirs -o $@ https://github.com/mpv-player/mpv/raw/master/etc/mpv-gradient.svg
-
 assets/mpv-logo@16px.png: assets/mpv-logo.svg
 	inkscape $< -o $@ -w 16 -h 16
 

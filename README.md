@@ -1,6 +1,6 @@
 # mpv for Chrome
 
-<img src="https://github.com/mpv-player/mpv/raw/master/etc/mpv-gradient.svg" alt="" width="128" height="128" align="left">
+<img src="assets/mpv-logo.svg" alt="" width="128" height="128" align="left">
 
 A browser extension that lets you open videos in webpages with a media player program—such as [mpv].
 
@@ -29,9 +29,8 @@ Download the [Nightly builds].
 
 ### Build from source
 
-Install [curl] and [Inkscape] to get and build the images.
+Install [Inkscape] to build the images.
 
-[curl]: https://curl.se
 [Inkscape]: https://inkscape.org
 
 ``` sh
