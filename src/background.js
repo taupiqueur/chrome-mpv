@@ -81,6 +81,10 @@ function onInstalled(details) {
 async function onInstall() {
   const defaults = await gettingDefaults
   await chrome.storage.sync.set(defaults)
+  await chrome.tabs.create({
+    active: true,
+    url: 'src/manual/manual.html'
+  })
 }
 
 /**
