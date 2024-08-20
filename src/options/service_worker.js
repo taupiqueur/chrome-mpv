@@ -4,9 +4,19 @@
 // Service workers: https://developer.chrome.com/docs/extensions/develop/concepts/service-workers
 // Long-lived connections: https://developer.chrome.com/docs/extensions/develop/concepts/messaging#connect
 
-// Retrieve the default config.
-const gettingDefaults = fetch('config.json')
-  .then((response) => response.json())
+/**
+ * Retrieves the default config.
+ *
+ * @returns {Promise<object>}
+ */
+async function getDefaults() {
+  return (
+    fetch('config.json')
+      .then((response) =>
+        response.json()
+      )
+  )
+}
 
 /**
  * Handles a new connection when opening the “Options” page.
@@ -62,9 +72,9 @@ async function saveOptions(partialOptions) {
  * @returns {Promise<void>}
  */
 async function resetOptions() {
-  const defaults = await gettingDefaults
+  const defaults = await getDefaults()
   await chrome.storage.sync.clear()
   await chrome.storage.sync.set(defaults)
 }
 
-export default { onConnect }
+export default { getDefaults, onConnect }

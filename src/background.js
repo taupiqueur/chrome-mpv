@@ -9,10 +9,6 @@ import optionsWorker from './options/service_worker.js'
 
 const { TAB_GROUP_ID_NONE } = chrome.tabGroups
 
-// Retrieve the default config.
-const gettingDefaults = fetch('config.json')
-  .then((response) => response.json())
-
 /**
  * Adds items to the browser’s context menu.
  *
@@ -79,7 +75,7 @@ function onInstalled(details) {
  * @returns {Promise<void>}
  */
 async function onInstall() {
-  const defaults = await gettingDefaults
+  const defaults = await optionsWorker.getDefaults()
   await chrome.storage.sync.set(defaults)
   await chrome.tabs.create({
     active: true,
@@ -94,7 +90,7 @@ async function onInstall() {
  * @returns {Promise<void>}
  */
 async function onUpdate(previousVersion) {
-  const defaults = await gettingDefaults
+  const defaults = await optionsWorker.getDefaults()
   const localStorage = await chrome.storage.sync.get()
   await chrome.storage.sync.set({
     ...defaults,
