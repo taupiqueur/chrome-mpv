@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mpv Manual</title>
+    <link rel="icon" href="favicon.svg">
+    <link rel="stylesheet" href="manual.css">
+  </head>
+  <body>
+    <main id="mpv_manual">
+      <h1>
+        <a href="#mpv_manual">
+          mpv Manual
+        </a>
+      </h1>
+      <section id="post_installation_instructions">
+        <h2>
+          <a href="#post_installation_instructions">
+            Post-installation instructions
+          </a>
+        </h2>
+        <p>
+          Requires <a href="https://github.com/taupiqueur/chrome-shell" target="_blank">chrome-shell</a> for running shell commands.
+        </p>
+        <section id="allow_native_messaging_with_the_shell_application">
+          <h3>
+            <a href="#allow_native_messaging_with_the_shell_application">
+              Allow native messaging with the shell application
+            </a>
+          </h3>
+          <p>
+            Copy the extension ID and run the following in your terminal.
+          </p>
+          <div class="code-block-container">
+            <pre><code><b>chrome-shell</b> <b>install</b> [<b>--target</b>=<i>platform</i>] [<i>extension_ids</i>]
+</code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="chrome-shell install [--target=platform] [extension_ids]
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <p>
+            Possible targets are <code>chrome</code>, <code>chrome-dev</code>, <code>chrome-beta</code>, <code>chrome-canary</code> and <code>chromium</code>.
+          </p>
+        </section>
+      </section>
+      <section id="usage">
+        <h2>
+          <a href="#usage">
+            Usage
+          </a>
+        </h2>
+        <p>
+          <kbd>Ctrl</kbd>+<kbd>M</kbd> is the main keyboard shortcut.
+        </p>
+        <p>
+          Use it to open videos in webpages with mpv.
+        </p>
+        <section id="configure_keyboard_shortcuts">
+          <h3>
+            <a href="#configure_keyboard_shortcuts">
+              Configure keyboard shortcuts
+            </a>
+          </h3>
+          <p>
+            Navigate to <a href="chrome://extensions/shortcuts" target="_blank">chrome://extensions/shortcuts</a> to configure keyboard shortcuts.
+          </p>
+        </section>
+        <section id="configure_the_media_player_program">
+          <h3>
+            <a href="#configure_the_media_player_program">
+              Configure the media player program
+            </a>
+          </h3>
+          <p>
+            You can also configure the media player program by importing and exporting settings
+            in the “Options” page—Right-click the mpv toolbar button and select “Options”.
+          </p>
+          <p>
+            Example configuration:
+          </p>
+          <div class="code-block-container">
+            <pre><code data-lang="json">{
+  <span data-type="string">"mpv"</span>: {
+    <span data-type="string">"command"</span>: <span data-type="string">"mpv"</span>,
+    <span data-type="string">"args"</span>: [<span data-type="string">"--"</span>]
+  }
+}
+</code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="{
+  &quot;mpv&quot;: {
+    &quot;command&quot;: &quot;mpv&quot;,
+    &quot;args&quot;: [&quot;--&quot;]
+  }
+}
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <div class="code-block-container">
+            <pre><code data-lang="json">{
+  <span data-type="string">"mpv"</span>: {
+    <span data-type="string">"command"</span>: <span data-type="string">"sh"</span>,
+    <span data-type="string">"args"</span>: [
+      <span data-type="string">"-c"</span>,
+      <span data-type="string">"jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --force-window=immediate --ontop --on-all-workspaces --geometry=30%+50%+50% -- \"$@\""</span>,
+      <span data-type="string">"--"</span>
+    ]
+  }
+}
+</code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="{
+  &quot;mpv&quot;: {
+    &quot;command&quot;: &quot;sh&quot;,
+    &quot;args&quot;: [
+      &quot;-c&quot;,
+      &quot;jq -nc '$ARGS.positional[] | { command: [\&quot;loadfile\&quot;, .] }' --args -- \&quot;$@\&quot; | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --force-window=immediate --ontop --on-all-workspaces --geometry=30%+50%+50% -- \&quot;$@\&quot;&quot;,
+      &quot;--&quot;
+    ]
+  }
+}
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <div class="code-block-container">
+            <pre><code data-lang="json">{
+  <span data-type="string">"mpv"</span>: {
+    <span data-type="string">"command"</span>: <span data-type="string">"sh"</span>,
+    <span data-type="string">"args"</span>: [
+      <span data-type="string">"-c"</span>,
+      <span data-type="string">"jq -nc '$ARGS.positional[] | { command: [\"loadfile\", .] }' --args -- \"$@\" | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --macos-app-activation-policy=accessory --ontop-level=desktop --ontop --on-all-workspaces --fs --no-native-fs --no-focus-on-open -- \"$@\""</span>,
+      <span data-type="string">"--"</span>
+    ]
+  }
+}
+</code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="{
+  &quot;mpv&quot;: {
+    &quot;command&quot;: &quot;sh&quot;,
+    &quot;args&quot;: [
+      &quot;-c&quot;,
+      &quot;jq -nc '$ARGS.positional[] | { command: [\&quot;loadfile\&quot;, .] }' --args -- \&quot;$@\&quot; | socat - UNIX-CONNECT:/tmp/mpv.sock || mpv --input-ipc-server=/tmp/mpv.sock --ytdl-raw-options=cookies-from-browser=chrome --player-operation-mode=pseudo-gui --macos-app-activation-policy=accessory --ontop-level=desktop --ontop --on-all-workspaces --fs --no-native-fs --no-focus-on-open -- \&quot;$@\&quot;&quot;,
+      &quot;--&quot;
+    ]
+  }
+}
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+          <p>
+            Make sure the commands are in your <code>PATH</code>.
+          </p>
+          <p>
+            On macOS, you can set the <code>PATH</code> environment variable for all services through <a href="https://ss64.com/osx/launchctl.html" target="_blank">launchctl</a>.
+          </p>
+          <div class="code-block-container">
+            <pre><code data-lang="sh"><span data-type="keyword">sudo</span> launchctl config user path <span data-type="string">"$PATH"</span>
+</code></pre>
+            <div>
+              <button
+                aria-label="Copy"
+                data-copy-feedback="Copied!"
+                data-action="copyToClipboard"
+                value="sudo launchctl config user path &quot;$PATH&quot;
+"
+              >
+                Copy
+              </button>
+            </div>
+          </div>
+        </section>
+      </section>
+      <section id="contributing">
+        <h2>
+          <a href="#contributing">
+            Contributing
+          </a>
+        </h2>
+        <p>
+          Report bugs on the <a href="https://github.com/taupiqueur/chrome-mpv/issues" target="_blank">issue tracker</a>,
+          ask questions on the <a href="https://web.libera.chat/gamja/#taupiqueur" target="_blank">IRC channel</a>,
+          send patches on the <a href="https://github.com/taupiqueur/chrome-mpv/pulls" target="_blank">mailing list</a>.
+        </p>
+      </section>
+    </main>
+    <script type="module" src="manual.js"></script>
+  </body>
+</html>

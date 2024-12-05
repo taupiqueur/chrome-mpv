@@ -1,0 +1,32 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 100 100"
+>
+  <defs>
+    <linearGradient id="linearGradient1" gradientTransform="rotate(45)">
+      <stop offset="0%" stop-color="#fafafa" />
+      <stop offset="100%" stop-color="#bababa" />
+    </linearGradient>
+    <linearGradient id="linearGradient2" gradientTransform="rotate(45)">
+      <stop offset="0%" stop-color="#6b3c74" />
+      <stop offset="100%" stop-color="#461b4d" />
+    </linearGradient>
+    <linearGradient id="linearGradient3" gradientTransform="rotate(90)">
+      <stop offset="0%" stop-color="#320f38" />
+      <stop offset="100%" stop-color="#5a2963" />
+    </linearGradient>
+    <linearGradient id="linearGradient4" gradientTransform="rotate(45)">
+      <stop offset="0%" stop-color="#e6e2e8" />
+      <stop offset="100%" stop-color="#aaa3ad" />
+    </linearGradient>
+    <linearGradient id="linearGradient5" gradientTransform="rotate(45)">
+      <stop offset="0%" stop-color="#65376e" />
+      <stop offset="100%" stop-color="#4c2354" />
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="50" fill="url(#linearGradient1)" />
+  <circle cx="51" cy="49" r="47" fill="url(#linearGradient2)" />
+  <circle cx="53" cy="47" r="37" fill="url(#linearGradient3)" />
+  <circle cx="50" cy="50" r="25" fill="url(#linearGradient4)" />
+  <polygon points="42,40 60,50 42,60" fill="url(#linearGradient5)" />
+</svg>
