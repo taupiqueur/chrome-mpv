@@ -2,7 +2,7 @@
   "name": "mpv",
   "version": "0.1.0",
   "description": "Open videos in webpages with a media player program.",
-  "homepage_url": "https://github.com/taupiqueur/chrome-mpv",
+  "homepage_url": "https://taupiqueur.github.io/chrome-mpv",
   "author": "Mathieu Ablasou <taupiqueur.kanto@gmail.com>",
   "manifest_version": 3,
   "background": {
