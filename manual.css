@@ -37,6 +37,7 @@
     --code-block-text-color: #000000;
     --boolean-color: darkred;
     --string-color: green;
+    --code-color: green;
   }
 }
 
@@ -75,6 +76,49 @@
     --code-block-text-color: #c5d1de;
     --boolean-color: #6cb6ff;
     --string-color: #8ddb8c;
+    --code-color: #8ddb8c;
+  }
+}
+
+@media (max-width: 800px) {
+  .table-wrapper {
+    overflow: visible !important;
+  }
+
+  table, thead, tbody, tr, th, td {
+    display: block;
+  }
+
+  table thead {
+    width: 1px;
+    height: 1px;
+    clip-path: inset(100%);
+  }
+
+  table tbody tr {
+    border-block-start: 4px solid var(--table-head-border-color);
+    border-block-end: none;
+    margin-block-end: 1rem;
+  }
+
+  table tbody tr:last-child {
+    border-block-end: 1px solid var(--table-body-border-color);
+    margin-block-end: 0;
+  }
+
+  table tbody td {
+    position: relative;
+    padding-inline-start: 50%;
+    min-height: 3rem;
+  }
+
+  table tbody td::before {
+    content: attr(data-label);
+    font-weight: lighter;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 45%;
   }
 }
 
@@ -102,12 +146,20 @@ section {
   content: "#";
 }
 
-.tag-pill {
+button[popovertarget] {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: inherit;
+  background-color: inherit;
+  cursor: help;
+}
+
+button.tag-pill {
   padding: 0.1em 0.2em;
   border-radius: 0.3em;
   background-color: var(--tag-pill-background-color);
   color: var(--tag-pill-text-color);
-  cursor: help;
 }
 
 p[role="note"] {
@@ -167,6 +219,10 @@ th, td {
   padding: 0.4em 0.8em;
 }
 
+td:nth-child(n+3):nth-child(-n+5) code {
+  color: var(--code-color);
+}
+
 kbd {
   border: 1px solid;
   padding-inline: 2px;
@@ -188,6 +244,7 @@ kbd.code:hover {
 }
 
 figure {
+  margin-inline: 0;
   text-align: center;
 }
 
