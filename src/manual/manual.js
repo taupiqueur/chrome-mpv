@@ -54,32 +54,28 @@ for (const chromeLinkElement of chromeLinkElements) {
       pointerEventModifiers === Modifier.Control ||
       pointerEventModifiers === Modifier.Meta
     ) {
+      suppressEvent(pointerEvent)
       openNewBackgroundTab(chromeLinkElement.href)
-      pointerEvent.preventDefault()
-      pointerEvent.stopImmediatePropagation()
     } else if (
       pointerEventModifiers === Modifier.None ||
       pointerEventModifiers === (Modifier.Control | Modifier.Shift) ||
       pointerEventModifiers === (Modifier.Shift | Modifier.Meta)
     ) {
+      suppressEvent(pointerEvent)
       openNewForegroundTab(chromeLinkElement.href)
-      pointerEvent.preventDefault()
-      pointerEvent.stopImmediatePropagation()
     } else if (
       pointerEventModifiers === Modifier.Shift
     ) {
+      suppressEvent(pointerEvent)
       openNewWindow(chromeLinkElement.href)
-      pointerEvent.preventDefault()
-      pointerEvent.stopImmediatePropagation()
     }
   })
 
   chromeLinkElement.addEventListener('auxclick', (pointerEvent) => {
     switch (pointerEvent.button) {
       case MIDDLE_MOUSE_BUTTON:
+        suppressEvent(pointerEvent)
         openNewBackgroundTab(chromeLinkElement.href)
-        pointerEvent.preventDefault()
-        pointerEvent.stopImmediatePropagation()
         break
     }
   })
@@ -122,4 +118,15 @@ function openNewWindow(url) {
     type: 'openNewWindow',
     url
   })
+}
+
+/**
+ * Prevents the browser’s default handling of the event and stops propagation.
+ *
+ * @param {Event} event
+ * @returns {void}
+ */
+function suppressEvent(event) {
+  event.preventDefault()
+  event.stopImmediatePropagation()
 }
