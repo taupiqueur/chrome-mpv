@@ -3,14 +3,12 @@
 // See lydell’s work for reference:
 // https://github.com/lydell/LinkHints/blob/main/src/options/Program.tsx
 
-// Open a channel to communicate with the service worker.
 const port = chrome.runtime.connect({
   name: 'options'
 })
 
 const buttonElements = document.querySelectorAll('button')
 
-// Add action to buttons.
 for (const buttonElement of buttonElements) {
   const actionName = buttonElement.dataset.action
 
